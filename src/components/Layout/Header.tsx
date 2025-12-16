@@ -14,13 +14,13 @@ const Header = ({ settings }: { settings: SettingsDocument }) => {
         <Link href="/">
           <BrandSignature className="text-lg" />
         </Link>
-        <ul className="flex items-center pl-8 pr-4 backdrop-blur gap-4">
+        <ul className="xl:w-[calc(40%+2rem)] flex items-center pl-8 pr-4 backdrop-blur gap-4">
           {links.map((link) => (
             <li key={link.key}>
               <PrismicNextLink field={link} />
             </li>
           ))}
-          <li>
+          <li className="ml-auto">
             <Link href="/#cart">Cart (0)</Link>
           </li>
         </ul>
