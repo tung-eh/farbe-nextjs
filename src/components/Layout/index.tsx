@@ -2,6 +2,8 @@ import { ReactNode } from "react";
 
 import type { SettingsDocument } from "@root/prismicio-types";
 
+import Header from "./Header";
+
 const Layout = ({
   settings,
   children,
@@ -11,7 +13,7 @@ const Layout = ({
 }) => {
   return (
     <body>
-      <div>{JSON.stringify(settings)}</div>
+      <Header settings={settings} />
       {children}
     </body>
   );
