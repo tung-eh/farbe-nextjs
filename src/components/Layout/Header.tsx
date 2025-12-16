@@ -16,7 +16,7 @@ const Header = ({ settings }: { settings: SettingsDocument }) => {
         </Link>
         <ul className="xl:w-[calc(40%+2rem)] flex items-center pl-8 pr-4 backdrop-blur">
           {links.map((link) => (
-            <li key={link.key}>
+            <li key={link.key} className="hidden xl:block">
               <PrismicNextLink field={link} className="cta" />
             </li>
           ))}
