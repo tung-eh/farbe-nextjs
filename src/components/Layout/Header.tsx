@@ -12,7 +12,7 @@ const Header = ({ settings }: { settings: SettingsDocument }) => {
     <header>
       <nav className="flex justify-between">
         <Link href="/">
-          <BrandSignature className="h-[1em] w-auto" />
+          <BrandSignature className="text-lg" />
         </Link>
         <ul className="flex items-center pl-8 pr-4 backdrop-blur gap-4">
           {links.map((link) => (
