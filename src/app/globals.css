@@ -8,6 +8,14 @@
   --font-mono-font-feature-settings: "ss09" on;
 }
 
+html {
+  @apply bg-white scroll-smooth;
+}
+
+body {
+  @apply font-mono text-sm;
+}
+
 .cta {
   @apply leading-tight p-4 hover:underline focus:outline-none focus-visible:bg-black focus-visible:text-white;
 }
