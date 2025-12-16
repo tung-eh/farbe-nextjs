@@ -11,17 +11,20 @@ const Header = ({ settings }: { settings: SettingsDocument }) => {
   return (
     <header>
       <nav className="flex justify-between">
-        <Link href="/">
+        <Link href="/" className="cta ml-4">
           <BrandSignature className="text-lg" />
         </Link>
-        <ul className="xl:w-[calc(40%+2rem)] flex items-center pl-8 pr-4 backdrop-blur gap-4">
+        <ul className="xl:w-[calc(40%+2rem)] flex items-center pl-8 pr-4 backdrop-blur">
           {links.map((link) => (
             <li key={link.key}>
-              <PrismicNextLink field={link} />
+              <PrismicNextLink field={link} className="cta" />
             </li>
           ))}
+
           <li className="ml-auto">
-            <Link href="/#cart">Cart (0)</Link>
+            <Link href="/#cart" className="cta">
+              Cart (0)
+            </Link>
           </li>
         </ul>
       </nav>
