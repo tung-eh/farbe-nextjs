@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PrismicNextLink } from "@prismicio/next";
 
 import type { SettingsDocument } from "@root/prismicio-types";
 
@@ -13,7 +14,16 @@ const Header = ({ settings }: { settings: SettingsDocument }) => {
         <Link href="/">
           <BrandSignature className="h-[1em] w-auto" />
         </Link>
-        <ul className="max-w-[50vw]">{JSON.stringify(links)}</ul>
+        <ul className="flex items-center pl-8 pr-4 backdrop-blur gap-4">
+          {links.map((link) => (
+            <li key={link.key}>
+              <PrismicNextLink field={link} />
+            </li>
+          ))}
+          <li>
+            <Link href="/#cart">Cart (0)</Link>
+          </li>
+        </ul>
       </nav>
     </header>
   );
