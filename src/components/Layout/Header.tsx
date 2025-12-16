@@ -20,7 +20,6 @@ const Header = ({ settings }: { settings: SettingsDocument }) => {
               <PrismicNextLink field={link} className="cta" />
             </li>
           ))}
-
           <li className="ml-auto">
             <Link href="/#cart" className="cta">
               Cart (0)
