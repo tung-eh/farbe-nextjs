@@ -1,5 +1,5 @@
 import { PrismicPreview } from "@prismicio/next";
-import { repositoryName } from "@/prismicio";
+import { repositoryName, createClient } from "@/prismicio";
 import { Inter, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
@@ -16,14 +16,20 @@ const geistMono = Geist_Mono({
   fallback: ["monospace"],
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const client = createClient();
+  const settings = await client.getSingle("settings");
+
   return (
     <html lang="en" className={`${inter.variable} ${geistMono.variable}`}>
-      <body>{children}</body>
+      <body>
+        <div>{JSON.stringify(settings)}</div>
+        {children}
+      </body>
       <PrismicPreview repositoryName={repositoryName} />
     </html>
   );
