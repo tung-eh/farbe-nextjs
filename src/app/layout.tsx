@@ -1,6 +1,8 @@
+import { type Metadata } from "next";
+import { Inter, Geist_Mono } from "next/font/google";
+
 import { PrismicPreview } from "@prismicio/next";
 import { repositoryName, createClient } from "@/prismicio";
-import { Inter, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
 
@@ -33,4 +35,19 @@ export default async function RootLayout({
       <PrismicPreview repositoryName={repositoryName} />
     </html>
   );
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const client = createClient();
+  const settings = await client.getSingle("settings");
+
+  return {
+    title: settings.data.site_title,
+    description: settings.data.meta_description,
+    openGraph: {
+      title: settings.data.site_title ?? undefined,
+      description: settings.data.meta_description ?? undefined,
+      images: [{ url: settings.data.meta_image.url ?? "" }],
+    },
+  };
 }
