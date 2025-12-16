@@ -3,6 +3,7 @@ import { Inter, Geist_Mono } from "next/font/google";
 
 import { PrismicPreview } from "@prismicio/next";
 import { repositoryName, createClient } from "@/prismicio";
+import Layout from "@/components/Layout";
 
 import "./globals.css";
 
@@ -28,10 +29,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={`${inter.variable} ${geistMono.variable}`}>
-      <body>
-        <div>{JSON.stringify(settings)}</div>
-        {children}
-      </body>
+      <Layout settings={settings}>{children}</Layout>
       <PrismicPreview repositoryName={repositoryName} />
     </html>
   );
