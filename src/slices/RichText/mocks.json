@@ -34,8 +34,8 @@
 				"type": "Link",
 				"value": [
 					{
-						"__TYPE__": "LinkContent",
 						"key": "f722ed6a-4e35-48e6-a15b-ebce8d49759e",
+						"__TYPE__": "LinkContent",
 						"value": {
 							"__TYPE__": "ExternalLink",
 							"url": "https://prismic.io",
@@ -44,12 +44,62 @@
 						}
 					},
 					{
-						"__TYPE__": "LinkContent",
 						"key": "192004e2-96a0-4c85-a935-41d60c2bcfe2",
+						"__TYPE__": "LinkContent",
 						"value": {
 							"__TYPE__": "AnyLink",
 							"kind": "any",
 							"text": "More"
+						}
+					}
+				]
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "fullscreen",
+		"primary": {
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading1",
+						"content": {
+							"text": "Several"
+						}
+					}
+				]
+			},
+			"content": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Elit adipisicing sit mollit non mollit velit nisi et ullamco duis ullamco excepteur eu ut."
+						}
+					}
+				]
+			},
+			"ctas": {
+				"__TYPE__": "RepeatableContent",
+				"type": "Link",
+				"value": [
+					{
+						"key": "c7a637a6-79d1-4acd-a308-c4557668400d",
+						"__TYPE__": "LinkContent",
+						"value": {
+							"__TYPE__": "ExternalLink",
+							"url": "https://prismic.io",
+							"text": "torn",
+							"variant": "Outline"
 						}
 					}
 				]
