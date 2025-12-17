@@ -16,6 +16,7 @@ const Footer = ({ settings }: { settings: SettingsDocument }) => {
           <BrandSignature />
         </h2>
         <PrismicRichText field={settings.data.footer_content} />
+        <div className="flex-1" />
         <PrismicRichText field={settings.data.footer_secondary_content} />
       </section>
     </footer>
