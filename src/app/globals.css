@@ -33,3 +33,38 @@ header:has(a:hover) a:not(:hover) {
 .bounded {
   @apply mx-auto xl:mr-0 max-w-[60ch] xl:max-w-2/5 px-8 xl:px-4 py-16;
 }
+
+.rich-text {
+  & > h1 {
+    @apply font-sans font-bold leading-none text-[max(3rem,5vw)];
+  }
+
+  & > h2 {
+    @apply font-sans font-bold leading-none text-[max(1.875rem,2.5vw)];
+  }
+
+  & > h3 {
+    @apply font-sans font-bold leading-none text-[max(1.25rem,1.25vw)];
+
+    &:not(:first-child) {
+      @apply mt-16;
+    }
+  }
+
+  & > p,
+  & > ul,
+  & > ul > li {
+    @apply max-w-[40ch];
+
+    &:not(:first-child) {
+      @apply mt-4;
+    }
+  }
+
+  & > p,
+  & > ul > li {
+    & > a {
+      @apply underline focus:outline-none focus-visible:bg-black focus-visible:text-white;
+    }
+  }
+}
