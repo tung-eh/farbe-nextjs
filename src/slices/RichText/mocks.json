@@ -7,10 +7,12 @@
 				"__TYPE__": "StructuredTextContent",
 				"value": [
 					{
-						"type": "heading1",
+						"type": "heading2",
 						"content": {
-							"text": "Heart"
-						}
+							"text": "Shots from the\nFarbe community",
+							"spans": []
+						},
+						"direction": "ltr"
 					}
 				]
 			},
@@ -20,8 +22,10 @@
 					{
 						"type": "paragraph",
 						"content": {
-							"text": "Enim ut ipsum et Lorem et pariatur."
-						}
+							"text": "From around the world, photographers use Farbe to capture unique slices of life.",
+							"spans": []
+						},
+						"direction": "ltr"
 					}
 				]
 			},
@@ -35,8 +39,17 @@
 						"value": {
 							"__TYPE__": "ExternalLink",
 							"url": "https://prismic.io",
-							"text": "city",
-							"variant": "Primary"
+							"text": "Join them in their journey ->",
+							"variant": "Text"
+						}
+					},
+					{
+						"__TYPE__": "LinkContent",
+						"key": "192004e2-96a0-4c85-a935-41d60c2bcfe2",
+						"value": {
+							"__TYPE__": "AnyLink",
+							"kind": "any",
+							"text": "More"
 						}
 					}
 				]

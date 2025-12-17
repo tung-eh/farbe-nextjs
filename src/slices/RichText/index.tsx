@@ -1,36 +1,28 @@
 import { type FC } from "react";
 import { type Content } from "@prismicio/client";
+import { PrismicRichText, type SliceComponentProps } from "@prismicio/react";
 import { PrismicNextLink } from "@prismicio/next";
-import {
-  PrismicRichText,
-  type SliceComponentProps,
-  type JSXMapSerializer,
-} from "@prismicio/react";
-import styles from "./index.module.css";
 
-const components: JSXMapSerializer = {
-  hyperlink: ({ node, children }) => {
-    return <PrismicNextLink field={node.data}>{children}</PrismicNextLink>;
-  },
-  label: ({ node, children }) => {
-    if (node.data.label === "codespan") {
-      return <code>{children}</code>;
-    }
-  },
-};
-
-/**
- * Props for `RichText`.
- */
 type RichTextProps = SliceComponentProps<Content.RichTextSlice>;
 
-/**
- * Component for "RichText" Slices.
- */
 const RichText: FC<RichTextProps> = ({ slice }) => {
+  const { title, content, ctas = [] } = slice.primary;
+
   return (
-    <section className={styles.richtext}>
-      <PrismicRichText field={slice.primary.content} components={components} />
+    <section className="bounded rich-text">
+      <PrismicRichText field={title} />
+      <PrismicRichText field={content} />
+      {ctas.length > 0 && (
+        <div className="-ml-4 mt-16 flex gap-8">
+          {ctas.map((link) => (
+            <PrismicNextLink
+              key={link.key}
+              field={link}
+              className={`cta ${link.variant?.toLowerCase()}`}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 };
