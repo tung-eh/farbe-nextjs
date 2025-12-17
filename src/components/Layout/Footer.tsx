@@ -11,7 +11,7 @@ const Footer = ({ settings }: { settings: SettingsDocument }) => {
       <figure className="absolute inset-0">
         <BrandLogo className="h-screen w-full xl:w-auto" />
       </figure>
-      <section className="min-h-screen flex flex-col mix-blend-difference">
+      <section className="bounded min-h-screen flex flex-col mix-blend-difference">
         <h2>
           <BrandSignature />
         </h2>
