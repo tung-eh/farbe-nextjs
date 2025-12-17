@@ -28,6 +28,22 @@ header:has(a:hover) a:not(:hover) {
 
 .cta {
   @apply leading-tight p-4 hover:underline focus:outline-none focus-visible:bg-black focus-visible:text-white;
+
+  &.primary {
+    @apply bg-green focus-visible:bg-black;
+  }
+
+  &.invert {
+    @apply bg-black text-white focus-visible:bg-transparent focus-visible:text-black;
+  }
+
+  &.mute {
+    @apply opacity-25 hover:opacity-100 focus-visible:opacity-100;
+  }
+
+  &.outline {
+    @apply border-[1.5px] border-black;
+  }
 }
 
 .bounded {
