@@ -1,14 +1,19 @@
 import type { SettingsDocument } from "@root/prismicio-types";
 
-import Logo from "./Logo";
+import BrandLogo from "./BrandLogo";
+import BrandSignature from "./BrandSignature";
 
 const Footer = ({ settings }: { settings: SettingsDocument }) => {
   return (
     <footer className="relative z-20 bg-black text-white">
       <figure className="absolute inset-0">
-        <Logo className="h-screen w-full xl:w-auto" />
+        <BrandLogo className="h-screen w-full xl:w-auto" />
       </figure>
-      <section className="min-h-screen"></section>
+      <section className="min-h-screen flex flex-col">
+        <h2>
+          <BrandSignature />
+        </h2>
+      </section>
     </footer>
   );
 };
