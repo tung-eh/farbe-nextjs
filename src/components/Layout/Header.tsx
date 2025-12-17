@@ -9,7 +9,7 @@ const Header = ({ settings }: { settings: SettingsDocument }) => {
   const links = settings.data.navigation;
 
   return (
-    <header>
+    <header className="fixed top-0 left-0 right-0 z-10">
       <nav className="flex justify-between">
         <Link href="/" className="cta ml-4">
           <BrandSignature className="text-lg" />
