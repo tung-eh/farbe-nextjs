@@ -1,3 +1,5 @@
+import { PrismicRichText } from "@prismicio/react";
+
 import type { SettingsDocument } from "@root/prismicio-types";
 
 import BrandLogo from "./BrandLogo";
@@ -13,6 +15,8 @@ const Footer = ({ settings }: { settings: SettingsDocument }) => {
         <h2>
           <BrandSignature />
         </h2>
+        <PrismicRichText field={settings.data.footer_content} />
+        <PrismicRichText field={settings.data.footer_secondary_content} />
       </section>
     </footer>
   );
