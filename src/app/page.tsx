@@ -10,4 +10,3 @@ export default async function Home() {
   // <SliceZone> renders the page's slices.
   return <SliceZone slices={home.data.slices} components={components} />;
 }
-
