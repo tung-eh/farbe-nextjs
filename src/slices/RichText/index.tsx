@@ -4,13 +4,15 @@ import { PrismicRichText, type SliceComponentProps } from "@prismicio/react";
 import { PrismicNextLink } from "@prismicio/next";
 import { twMerge } from "tailwind-merge";
 
+import SlideIn from "@/atoms/SlideIn";
+
 type RichTextProps = SliceComponentProps<Content.RichTextSlice>;
 
 const RichText: FC<RichTextProps> = ({ slice }) => {
   const { title, content, ctas = [] } = slice.primary;
 
   return (
-    <section
+    <SlideIn
       className={twMerge(
         "bounded rich-text flex flex-col justify-center",
         slice.variation === "fullscreen" ? "min-h-screen" : "min-h-[40vh]",
@@ -29,7 +31,7 @@ const RichText: FC<RichTextProps> = ({ slice }) => {
           ))}
         </div>
       )}
-    </section>
+    </SlideIn>
   );
 };
 
