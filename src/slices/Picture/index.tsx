@@ -4,6 +4,8 @@ import { PrismicRichText, type SliceComponentProps } from "@prismicio/react";
 import { PrismicNextImage } from "@prismicio/next";
 import { twMerge } from "tailwind-merge";
 
+import SlideIn from "@/atoms/SlideIn";
+
 export type PictureProps = SliceComponentProps<Content.PictureSlice>;
 
 const Picture: FC<PictureProps> = ({ slice }) => {
@@ -18,7 +20,8 @@ const Picture: FC<PictureProps> = ({ slice }) => {
           field={slice.primary.picture}
           className="row-span-2 z-20"
         />
-        <figcaption
+        <SlideIn
+          as="figcaption"
           className={twMerge(
             "px-4 pt-4 pb-16 rich-text",
             slice.variation === "top"
@@ -27,7 +30,7 @@ const Picture: FC<PictureProps> = ({ slice }) => {
           )}
         >
           <PrismicRichText field={slice.primary.caption} />
-        </figcaption>
+        </SlideIn>
       </figure>
       {isFilled.image(slice.primary.secondary_picture) && (
         <figure
@@ -40,9 +43,9 @@ const Picture: FC<PictureProps> = ({ slice }) => {
             field={slice.primary.secondary_picture}
             className="z-20"
           />
-          <figcaption className="px-4 pt-4 pb-16 rich-text">
+          <SlideIn as="figcaption" className="px-4 pt-4 pb-16 rich-text">
             <PrismicRichText field={slice.primary.secondary_caption} />
-          </figcaption>
+          </SlideIn>
         </figure>
       )}
     </section>
