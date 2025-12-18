@@ -25,7 +25,7 @@ const Product: FC<ProductProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="bounded rich-text"
+      className="bounded rich-text min-h-[150vh] flex flex-col justify-center"
     >
       <PrismicRichText field={product.data.name} />
       <PrismicRichText field={product.data.description} />
