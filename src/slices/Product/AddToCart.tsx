@@ -1,12 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 
 const AddToCart = () => {
   const [quantity, setQuantity] = useState(1);
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    alert("handle add to cart");
+
+    setQuantity(1);
+  };
+
   return (
-    <form className="flex gap-4 text-sm max-w-[calc(40ch+1rem)] -ml-4 mt-16">
+    <form
+      className="flex gap-4 text-sm max-w-[calc(40ch+1rem)] -ml-4 mt-16"
+      onSubmit={handleSubmit}
+    >
       <div className="flex-1 flex items-center justify-between">
         <button
           type="button"
