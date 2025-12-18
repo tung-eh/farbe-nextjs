@@ -22,15 +22,18 @@ const Product: FC<ProductProps> = ({ slice }) => {
   const product = getProduct(slice);
 
   return product?.data ? (
-    <section
+    <article
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className="bounded rich-text min-h-[150vh] flex flex-col justify-center"
     >
-      <PrismicRichText field={product.data.name} />
+      <header id={product.uid} className="rich-text">
+        <PrismicRichText field={product.data.name} />
+        <p aria-label="Price">XX,XX € / roll</p>
+      </header>
       <PrismicRichText field={product.data.description} />
       <PrismicTable field={product.data.characteristics} />
-    </section>
+    </article>
   ) : (
     <section>
       <p>Product not found</p>
