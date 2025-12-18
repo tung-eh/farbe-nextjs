@@ -30,6 +30,7 @@ const SlideIn = ({
       stagger: 0.2,
       scrollTrigger: {
         trigger: ref.current,
+        start: "top bottom-=25%",
       },
     });
   });
