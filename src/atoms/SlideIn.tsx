@@ -3,6 +3,9 @@
 import { useRef, ElementType, ReactNode } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const SlideIn = ({
   as: Component = "section",
@@ -25,6 +28,9 @@ const SlideIn = ({
       duration: 1,
       ease: "power2.out",
       stagger: 0.2,
+      scrollTrigger: {
+        trigger: ref.current,
+      },
     });
   });
 
