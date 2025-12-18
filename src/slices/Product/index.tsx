@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { Fragment, ComponentProps, FC } from "react";
 import { isFilled, Content } from "@prismicio/client";
 import {
   PrismicRichText,
@@ -7,6 +7,11 @@ import {
 } from "@prismicio/react";
 
 export type ProductProps = SliceComponentProps<Content.ProductSlice>;
+
+const Dl = (props: ComponentProps<"dl">) => <dl {...props} />;
+const Dt = (props: ComponentProps<"dt">) => <dt {...props} />;
+const Dd = (props: ComponentProps<"dd">) => <dd {...props} />;
+const Div = (props: ComponentProps<"div">) => <div {...props} />;
 
 const getProduct = (slice: ProductProps["slice"]) => {
   const { product } = slice.primary;
@@ -25,14 +30,29 @@ const Product: FC<ProductProps> = ({ slice }) => {
     <article
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="bounded rich-text min-h-[150vh] flex flex-col justify-center"
+      className="bounded min-h-[150vh] flex flex-col justify-center"
     >
       <header id={product.uid} className="rich-text">
         <PrismicRichText field={product.data.name} />
         <p aria-label="Price">XX,XX € / roll</p>
       </header>
-      <PrismicRichText field={product.data.description} />
-      <PrismicTable field={product.data.characteristics} />
+      <section className="rich-text">
+        <h2 className="sr-only">Description</h2>
+        <PrismicRichText field={product.data.description} />
+      </section>
+      <section className="rich-text">
+        <h2 className="sr-only">Characteristics</h2>
+        <PrismicTable
+          field={product.data.characteristics}
+          components={{
+            table: Dl,
+            tbody: Fragment,
+            tr: Div,
+            th: Dt,
+            td: Dd,
+          }}
+        />
+      </section>
     </article>
   ) : (
     <section>
