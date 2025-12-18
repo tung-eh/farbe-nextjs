@@ -17,12 +17,16 @@ const getProduct = (slice: ProductProps["slice"]) => {
 const Product: FC<ProductProps> = ({ slice }) => {
   const product = getProduct(slice);
 
-  return (
+  return product ? (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <PrismicRichText field={product?.data?.name} />
+      <PrismicRichText field={product.data?.name} />
+    </section>
+  ) : (
+    <section>
+      <p>Product not found</p>
     </section>
   );
 };
