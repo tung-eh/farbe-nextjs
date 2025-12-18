@@ -69,7 +69,8 @@ header:has(a:hover) a:not(:hover) {
 
   & > p,
   & > ul,
-  & > ul > li {
+  & > ul > li,
+  & > dl {
     @apply max-w-[40ch];
 
     &:not(:first-child) {
@@ -77,8 +78,13 @@ header:has(a:hover) a:not(:hover) {
     }
   }
 
+  & > dl > div {
+    @apply flex justify-between;
+  }
+
   & > p,
-  & > ul > li {
+  & > ul > li,
+  & dd {
     & > a {
       @apply underline focus:outline-none focus-visible:bg-black focus-visible:text-white;
     }
