@@ -11,10 +11,14 @@ const SlideIn = ({
   as: Component = "section",
   children,
   className,
+  ...props
 }: {
   as?: ElementType;
   children: ReactNode;
   className?: string;
+} & {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: `data-${string}`]: any;
 }) => {
   const ref = useRef<HTMLElement>(null);
 
@@ -36,7 +40,7 @@ const SlideIn = ({
   });
 
   return (
-    <Component ref={ref} className={className}>
+    <Component ref={ref} className={className} {...props}>
       {children}
     </Component>
   );
