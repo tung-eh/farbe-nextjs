@@ -1,0 +1,38 @@
+{
+  "id": "product",
+  "type": "SharedSlice",
+  "name": "Product",
+  "description": "Product",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "product": {
+          "type": "Link",
+          "config": {
+            "label": "Product",
+            "select": "document",
+            "repeat": false,
+            "customtypes": [
+              {
+                "id": "product",
+                "fields": [
+                  "stripe_id",
+                  "name",
+                  "description",
+                  "characteristics"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

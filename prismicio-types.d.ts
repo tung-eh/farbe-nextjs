@@ -69,7 +69,7 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
-type PageDocumentDataSlicesSlice = PictureSlice | RichTextSlice;
+type PageDocumentDataSlicesSlice = ProductSlice | PictureSlice | RichTextSlice;
 
 /**
  * Content for Page documents
@@ -129,6 +129,71 @@ interface PageDocumentData {
  */
 export type PageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
+
+/**
+ * Content for Product documents
+ */
+interface ProductDocumentData {
+  /**
+   * Stripe ID field in *Product*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product.stripe_id
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  stripe_id: prismic.KeyTextField;
+
+  /**
+   * Name field in *Product*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product.name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  name: prismic.RichTextField;
+
+  /**
+   * Description field in *Product*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Characteristics field in *Product*
+   *
+   * - **Field Type**: Table
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product.characteristics
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/table
+   */
+  characteristics: prismic.TableField;
+}
+
+/**
+ * Product document from Prismic
+ *
+ * - **API ID**: `product`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ProductDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<ProductDocumentData>,
+    "product",
+    Lang
+  >;
 
 /**
  * Content for Settings documents
@@ -217,7 +282,10 @@ export type SettingsDocument<Lang extends string = string> =
     Lang
   >;
 
-export type AllDocumentTypes = PageDocument | SettingsDocument;
+export type AllDocumentTypes =
+  | PageDocument
+  | ProductDocument
+  | SettingsDocument;
 
 /**
  * Primary content in *Picture → Default → Primary*
@@ -414,6 +482,58 @@ export type PictureSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *Product → Default → Primary*
+ */
+export interface ProductSliceDefaultPrimary {
+  /**
+   * Product field in *Product → Default → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product.default.primary.product
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  product: ContentRelationshipFieldWithData<
+    [
+      {
+        id: "product";
+        fields: ["stripe_id", "name", "description", "characteristics"];
+      },
+    ]
+  >;
+}
+
+/**
+ * Default variation for Product Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ProductSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ProductSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Product*
+ */
+type ProductSliceVariation = ProductSliceDefault;
+
+/**
+ * Product Shared Slice
+ *
+ * - **API ID**: `product`
+ * - **Description**: Product
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ProductSlice = prismic.SharedSlice<
+  "product",
+  ProductSliceVariation
+>;
+
+/**
  * Primary content in *RichText → Default → Primary*
  */
 export interface RichTextSliceDefaultPrimary {
@@ -566,6 +686,8 @@ declare module "@prismicio/client" {
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,
+      ProductDocument,
+      ProductDocumentData,
       SettingsDocument,
       SettingsDocumentData,
       AllDocumentTypes,
@@ -577,6 +699,10 @@ declare module "@prismicio/client" {
       PictureSliceDefault,
       PictureSliceTop,
       PictureSliceBottom,
+      ProductSlice,
+      ProductSliceDefaultPrimary,
+      ProductSliceVariation,
+      ProductSliceDefault,
       RichTextSlice,
       RichTextSliceDefaultPrimary,
       RichTextSliceFullscreenPrimary,
