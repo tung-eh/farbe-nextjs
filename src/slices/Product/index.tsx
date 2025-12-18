@@ -6,6 +6,8 @@ import {
   SliceComponentProps,
 } from "@prismicio/react";
 
+import SlideIn from "@/atoms/SlideIn";
+
 export type ProductProps = SliceComponentProps<Content.ProductSlice>;
 
 const Dl = (props: ComponentProps<"dl">) => <dl {...props} />;
@@ -27,7 +29,11 @@ const Product: FC<ProductProps> = ({ slice }) => {
   const product = getProduct(slice);
 
   return product?.data ? (
-    <article
+    <SlideIn
+      as="article"
+      scrollTrigger={{
+        start: "top top+=25%",
+      }}
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className="bounded min-h-[150vh] flex flex-col justify-center"
@@ -53,11 +59,11 @@ const Product: FC<ProductProps> = ({ slice }) => {
           }}
         />
       </section>
-    </article>
+    </SlideIn>
   ) : (
-    <section>
+    <article>
       <p>Product not found</p>
-    </section>
+    </article>
   );
 };
 

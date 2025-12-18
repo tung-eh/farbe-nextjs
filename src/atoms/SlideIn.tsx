@@ -11,11 +11,13 @@ const SlideIn = ({
   as: Component = "section",
   children,
   className,
+  scrollTrigger,
   ...props
 }: {
   as?: ElementType;
   children: ReactNode;
   className?: string;
+  scrollTrigger?: ScrollTrigger.Vars;
 } & {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: `data-${string}`]: any;
@@ -35,6 +37,7 @@ const SlideIn = ({
       scrollTrigger: {
         trigger: ref.current,
         start: "top bottom-=25%",
+        ...scrollTrigger,
       },
     });
   });
