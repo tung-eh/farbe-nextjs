@@ -8,6 +8,8 @@ import {
 
 import SlideIn from "@/atoms/SlideIn";
 
+import AddToCart from "./AddToCart";
+
 export type ProductProps = SliceComponentProps<Content.ProductSlice>;
 
 const Dl = (props: ComponentProps<"dl">) => <dl {...props} />;
@@ -59,6 +61,7 @@ const Product: FC<ProductProps> = ({ slice }) => {
           }}
         />
       </section>
+      <AddToCart />
     </SlideIn>
   ) : (
     <article>
