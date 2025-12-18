@@ -69,7 +69,7 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
-type PageDocumentDataSlicesSlice = RichTextSlice;
+type PageDocumentDataSlicesSlice = PictureSlice | RichTextSlice;
 
 /**
  * Content for Page documents
@@ -218,6 +218,200 @@ export type SettingsDocument<Lang extends string = string> =
   >;
 
 export type AllDocumentTypes = PageDocument | SettingsDocument;
+
+/**
+ * Primary content in *Picture → Default → Primary*
+ */
+export interface PictureSliceDefaultPrimary {
+  /**
+   * Picture field in *Picture → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: picture.default.primary.picture
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  picture: prismic.ImageField<never>;
+
+  /**
+   * Caption field in *Picture → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: picture.default.primary.caption
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  caption: prismic.RichTextField;
+
+  /**
+   * Secondary Picture (optional) field in *Picture → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: picture.default.primary.secondary_picture
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  secondary_picture: prismic.ImageField<never>;
+
+  /**
+   * Secondary Caption (optional) field in *Picture → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: picture.default.primary.secondary_caption
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  secondary_caption: prismic.RichTextField;
+}
+
+/**
+ * Default variation for Picture Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type PictureSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<PictureSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *Picture → Top → Primary*
+ */
+export interface PictureSliceTopPrimary {
+  /**
+   * Picture field in *Picture → Top → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: picture.top.primary.picture
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  picture: prismic.ImageField<never>;
+
+  /**
+   * Caption field in *Picture → Top → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: picture.top.primary.caption
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  caption: prismic.RichTextField;
+
+  /**
+   * Secondary Picture (optional) field in *Picture → Top → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: picture.top.primary.secondary_picture
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  secondary_picture: prismic.ImageField<never>;
+
+  /**
+   * Secondary Caption (optional) field in *Picture → Top → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: picture.top.primary.secondary_caption
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  secondary_caption: prismic.RichTextField;
+}
+
+/**
+ * Top variation for Picture Slice
+ *
+ * - **API ID**: `top`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type PictureSliceTop = prismic.SharedSliceVariation<
+  "top",
+  Simplify<PictureSliceTopPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *Picture → Bottom → Primary*
+ */
+export interface PictureSliceBottomPrimary {
+  /**
+   * Picture field in *Picture → Bottom → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: picture.bottom.primary.picture
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  picture: prismic.ImageField<never>;
+
+  /**
+   * Caption field in *Picture → Bottom → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: picture.bottom.primary.caption
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  caption: prismic.RichTextField;
+
+  /**
+   * Secondary Picture (optional) field in *Picture → Bottom → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: picture.bottom.primary.secondary_picture
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  secondary_picture: prismic.ImageField<never>;
+
+  /**
+   * Secondary Caption (optional) field in *Picture → Bottom → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: picture.bottom.primary.secondary_caption
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  secondary_caption: prismic.RichTextField;
+}
+
+/**
+ * Bottom variation for Picture Slice
+ *
+ * - **API ID**: `bottom`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type PictureSliceBottom = prismic.SharedSliceVariation<
+  "bottom",
+  Simplify<PictureSliceBottomPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Picture*
+ */
+type PictureSliceVariation =
+  | PictureSliceDefault
+  | PictureSliceTop
+  | PictureSliceBottom;
+
+/**
+ * Picture Shared Slice
+ *
+ * - **API ID**: `picture`
+ * - **Description**: Picture
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type PictureSlice = prismic.SharedSlice<
+  "picture",
+  PictureSliceVariation
+>;
 
 /**
  * Primary content in *RichText → Default → Primary*
@@ -375,6 +569,14 @@ declare module "@prismicio/client" {
       SettingsDocument,
       SettingsDocumentData,
       AllDocumentTypes,
+      PictureSlice,
+      PictureSliceDefaultPrimary,
+      PictureSliceTopPrimary,
+      PictureSliceBottomPrimary,
+      PictureSliceVariation,
+      PictureSliceDefault,
+      PictureSliceTop,
+      PictureSliceBottom,
       RichTextSlice,
       RichTextSliceDefaultPrimary,
       RichTextSliceFullscreenPrimary,
