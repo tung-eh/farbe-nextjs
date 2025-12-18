@@ -16,7 +16,7 @@ const Picture: FC<PictureProps> = ({ slice }) => {
       <figure className="contents">
         <PrismicNextImage
           field={slice.primary.picture}
-          className="row-span-2"
+          className="row-span-2 z-20"
         />
         <figcaption
           className={twMerge(
@@ -36,7 +36,10 @@ const Picture: FC<PictureProps> = ({ slice }) => {
             slice.variation === "bottom" && "xl:self-end xl:flex-col-reverse",
           )}
         >
-          <PrismicNextImage field={slice.primary.secondary_picture} />
+          <PrismicNextImage
+            field={slice.primary.secondary_picture}
+            className="z-20"
+          />
           <figcaption className="px-4 pt-4 pb-16 rich-text">
             <PrismicRichText field={slice.primary.secondary_caption} />
           </figcaption>
