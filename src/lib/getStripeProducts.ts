@@ -1,6 +1,6 @@
 import Stripe from "stripe";
 
-type StripeProduct = {
+export type StripeProduct = {
   id: string;
   name: string;
   price: number;

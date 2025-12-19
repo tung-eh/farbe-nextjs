@@ -7,10 +7,16 @@ import {
 } from "@prismicio/react";
 
 import SlideIn from "@/atoms/SlideIn";
+import { StripeProduct } from "@/lib/getStripeProducts";
 
 import AddToCart from "./AddToCart";
 
-export type ProductProps = SliceComponentProps<Content.ProductSlice>;
+export type ProductProps = SliceComponentProps<
+  Content.ProductSlice,
+  {
+    stripeProducts: Record<string, StripeProduct>;
+  }
+>;
 
 const Dl = (props: ComponentProps<"dl">) => <dl {...props} />;
 const Dt = (props: ComponentProps<"dt">) => <dt {...props} />;
