@@ -69,7 +69,11 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
-type PageDocumentDataSlicesSlice = ProductSlice | PictureSlice | RichTextSlice;
+type PageDocumentDataSlicesSlice =
+  | CartSlice
+  | ProductSlice
+  | PictureSlice
+  | RichTextSlice;
 
 /**
  * Content for Page documents
@@ -286,6 +290,68 @@ export type AllDocumentTypes =
   | PageDocument
   | ProductDocument
   | SettingsDocument;
+
+/**
+ * Primary content in *Cart → Default → Primary*
+ */
+export interface CartSliceDefaultPrimary {
+  /**
+   * Title field in *Cart → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cart.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Content field in *Cart → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cart.default.primary.content
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  content: prismic.RichTextField;
+
+  /**
+   * Empty Content field in *Cart → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cart.default.primary.empty_content
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  empty_content: prismic.RichTextField;
+}
+
+/**
+ * Default variation for Cart Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CartSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<CartSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Cart*
+ */
+type CartSliceVariation = CartSliceDefault;
+
+/**
+ * Cart Shared Slice
+ *
+ * - **API ID**: `cart`
+ * - **Description**: Cart
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CartSlice = prismic.SharedSlice<"cart", CartSliceVariation>;
 
 /**
  * Primary content in *Picture → Default → Primary*
@@ -691,6 +757,10 @@ declare module "@prismicio/client" {
       SettingsDocument,
       SettingsDocumentData,
       AllDocumentTypes,
+      CartSlice,
+      CartSliceDefaultPrimary,
+      CartSliceVariation,
+      CartSliceDefault,
       PictureSlice,
       PictureSliceDefaultPrimary,
       PictureSliceTopPrimary,
