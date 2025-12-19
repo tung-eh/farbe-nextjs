@@ -53,7 +53,7 @@ const Product: FC<ProductProps> = ({ slice, context }) => {
     >
       <header id={product.uid} className="rich-text">
         <PrismicRichText field={product.data.name} />
-        <p aria-label="Price">XX,XX € / roll</p>
+        <p aria-label="Price">{(product.price / 100).toFixed(2)} € / roll</p>
       </header>
       <section className="rich-text">
         <h2 className="sr-only">Description</h2>
