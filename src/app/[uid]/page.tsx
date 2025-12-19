@@ -6,6 +6,7 @@ import { SliceZone } from "@prismicio/react";
 
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
+import getStripeProducts from "@/lib/getStripeProducts";
 
 type Params = { uid: string };
 
@@ -14,8 +15,16 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   const client = createClient();
   const page = await client.getByUID("page", uid).catch(() => notFound());
 
+  const stripeProducts = await getStripeProducts();
+
   // <SliceZone> renders the page's slices.
-  return <SliceZone slices={page.data.slices} components={components} />;
+  return (
+    <SliceZone
+      slices={page.data.slices}
+      components={components}
+      context={{ stripeProducts }}
+    />
+  );
 }
 
 export async function generateMetadata({
