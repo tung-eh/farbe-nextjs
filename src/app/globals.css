@@ -38,7 +38,7 @@ header:has(a:hover) a:not(:hover) {
   }
 
   &.mute {
-    @apply opacity-25 hover:opacity-100 focus-visible:opacity-100;
+    @apply opacity-50 hover:opacity-100 focus-visible:opacity-100;
   }
 
   &.outline {
