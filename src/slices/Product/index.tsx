@@ -35,7 +35,7 @@ const getProduct = (
 
   return {
     ...product,
-    price: stripeProducts[product.data.stripe_id].price,
+    stripe: stripeProducts[product.data.stripe_id],
   };
 };
 
@@ -54,7 +54,7 @@ const Product: FC<ProductProps> = ({ slice, context }) => {
     >
       <header id={product.uid} className="rich-text">
         <PrismicRichText field={product.data.name} />
-        <p aria-label="Price">{formatPrice(product.price)} / roll</p>
+        <p aria-label="Price">{formatPrice(product.stripe.price)} / roll</p>
       </header>
       <section className="rich-text">
         <h2 className="sr-only">Description</h2>
@@ -73,7 +73,7 @@ const Product: FC<ProductProps> = ({ slice, context }) => {
           }}
         />
       </section>
-      <AddToCart />
+      <AddToCart stripeProduct={product.stripe} />
     </SlideIn>
   ) : (
     <article>
