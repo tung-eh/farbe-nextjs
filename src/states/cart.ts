@@ -42,11 +42,19 @@ export const useCart = () => {
       return;
     }
 
-    setItems(produce((draft) => (draft[item.product.id] = item)));
+    setItems(
+      produce((draft) => {
+        draft[item.product.id] = item;
+      }),
+    );
   }
 
   function removeItem(id: string) {
-    setItems(produce((draft) => delete draft[id]));
+    setItems(
+      produce((draft) => {
+        delete draft[id];
+      }),
+    );
   }
 
   function clear() {
