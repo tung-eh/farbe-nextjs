@@ -13,9 +13,7 @@ import AddToCart from "./AddToCart";
 
 export type ProductProps = SliceComponentProps<
   Content.ProductSlice,
-  {
-    stripeProducts: Record<string, StripeProduct>;
-  }
+  { stripeProducts: Record<string, StripeProduct> }
 >;
 
 const Dl = (props: ComponentProps<"dl">) => <dl {...props} />;
@@ -23,18 +21,25 @@ const Dt = (props: ComponentProps<"dt">) => <dt {...props} />;
 const Dd = (props: ComponentProps<"dd">) => <dd {...props} />;
 const Div = (props: ComponentProps<"div">) => <div {...props} />;
 
-const getProduct = (slice: ProductProps["slice"]) => {
+const getProduct = (
+  slice: ProductProps["slice"],
+  context: ProductProps["context"],
+) => {
   const { product } = slice.primary;
+  const { stripeProducts } = context;
 
-  if (!isFilled.contentRelationship(product)) {
+  if (!isFilled.contentRelationship(product) || !product.data?.stripe_id) {
     return undefined;
   }
 
-  return product;
+  return {
+    ...product,
+    price: stripeProducts[product.data.stripe_id].price,
+  };
 };
 
-const Product: FC<ProductProps> = ({ slice }) => {
-  const product = getProduct(slice);
+const Product: FC<ProductProps> = ({ slice, context }) => {
+  const product = getProduct(slice, context);
 
   return product?.data ? (
     <SlideIn
