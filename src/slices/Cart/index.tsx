@@ -22,7 +22,6 @@ const Cart: FC<CartProps> = ({ slice }) => {
         content={slice.primary.content}
         emptyContent={slice.primary.empty_content}
       />
-      <button className="cta primary w-full max-w-[40ch]">Check out</button>
     </form>
   );
 };
