@@ -28,7 +28,7 @@ export const useCart = () => {
   function insertItem(item: CartItem) {
     setItems(
       produce((draft) => {
-        const currentQuantity = draft[item.product.id].quantity ?? 0;
+        const currentQuantity = draft[item.product.id]?.quantity ?? 0;
         draft[item.product.id] = {
           ...item,
           quantity: item.quantity + currentQuantity,
