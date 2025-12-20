@@ -9,7 +9,9 @@ export type CartProps = SliceComponentProps<Content.CartSlice>;
 
 const Cart: FC<CartProps> = ({ slice }) => {
   return (
-    <section
+    <form
+      method="POST"
+      action="/api/checkout"
       id="cart"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
@@ -20,7 +22,8 @@ const Cart: FC<CartProps> = ({ slice }) => {
         content={slice.primary.content}
         emptyContent={slice.primary.empty_content}
       />
-    </section>
+      <button className="cta primary w-full max-w-[40ch]">Check out</button>
+    </form>
   );
 };
 
