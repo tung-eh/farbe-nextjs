@@ -43,6 +43,7 @@ const CartContent = ({
             >
               &times;
             </button>
+            <input type="hidden" name={product.id} value={quantity} />
           </li>
         ))}
       </ul>
