@@ -7,22 +7,21 @@ import { ScrollTrigger } from "gsap/all";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const SlideIn = ({
-  as: Component = "section",
+type SlideInProps<T extends ElementType> = {
+  as?: T;
+  children: ReactNode;
+  scrollTrigger?: ScrollTrigger.Vars;
+} & React.ComponentPropsWithoutRef<T>;
+
+const SlideIn = <T extends ElementType = "section">({
+  as,
   children,
   className,
   scrollTrigger,
   ...props
-}: {
-  as?: ElementType;
-  children: ReactNode;
-  className?: string;
-  scrollTrigger?: ScrollTrigger.Vars;
-} & {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: `data-${string}`]: any;
-}) => {
+}: SlideInProps<T>) => {
   const ref = useRef<HTMLElement>(null);
+  const Component: ElementType = as ?? "section";
 
   useGSAP(() => {
     if (!ref.current) return;
