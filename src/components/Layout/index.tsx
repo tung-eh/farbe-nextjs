@@ -4,6 +4,7 @@ import type { SettingsDocument } from "@root/prismicio-types";
 
 import Header from "./Header";
 import Footer from "./Footer";
+import ClearCart from "./ClearCart";
 
 const Layout = ({
   settings,
@@ -14,6 +15,7 @@ const Layout = ({
 }) => {
   return (
     <body>
+      <ClearCart />
       <Header settings={settings} />
       {children}
       <Footer settings={settings} />
