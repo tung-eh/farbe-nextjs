@@ -14,12 +14,21 @@ export async function POST(req: NextRequest) {
       quantity: Number(quantity),
     }));
 
-    const session = stripe.checkout.sessions.create({
+    const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items: items,
+      success_url: `${req.headers.get("origin")}/thanks?order=completed`,
+      cancel_url: `${req.headers.get("origin")}/#cart`,
     });
 
-    return NextResponse.json({ items });
+    if (!session.url) {
+      return NextResponse.json(
+        { error: "Failed to create checkout session" },
+        { status: 500 },
+      );
+    }
+
+    return NextResponse.redirect(session.url, { status: 303 });
   } catch (error) {
     console.error("Error checking out:", error);
     return NextResponse.json({ error: "Error checking out" }, { status: 500 });
