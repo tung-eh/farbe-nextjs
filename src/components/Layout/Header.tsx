@@ -4,6 +4,7 @@ import { PrismicNextLink } from "@prismicio/next";
 import type { SettingsDocument } from "@root/prismicio-types";
 
 import BrandSignature from "./BrandSignature";
+import CartTotal from "./CartTotal";
 
 const Header = ({ settings }: { settings: SettingsDocument }) => {
   const links = settings.data.navigation;
@@ -22,7 +23,7 @@ const Header = ({ settings }: { settings: SettingsDocument }) => {
           ))}
           <li className="ml-auto">
             <Link href="/#cart" className="cta">
-              Cart (0)
+              Cart (<CartTotal />)
             </Link>
           </li>
         </ul>

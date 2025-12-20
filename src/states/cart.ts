@@ -15,14 +15,15 @@ const LOCAL_STORAGE_KEY = "fabre-cart";
 export const useCart = () => {
   const [items, setItems] = useLocalStorage<CartItems>(LOCAL_STORAGE_KEY, {});
 
-  const totalPrice = () =>
-    Object.values(items).reduce(
-      (sum, item) => sum + item.product.price * item.quantity,
-      0,
-    );
+  const totalPrice = Object.values(items).reduce(
+    (sum, item) => sum + item.product.price * item.quantity,
+    0,
+  );
 
-  const totalItems = () =>
-    Object.values(items).reduce((sum, item) => sum + item.quantity, 0);
+  const totalItems = Object.values(items).reduce(
+    (sum, item) => sum + item.quantity,
+    0,
+  );
 
   function insertItem(item: CartItem) {
     setItems(
