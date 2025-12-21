@@ -17,6 +17,11 @@ const eslintConfig = [
       "build/**",
       "next-env.d.ts",
     ],
+    rules: {
+      // React 19 Compiler -> set-state-in-effect false positive
+      // https://github.com/facebook/react/issues/34743
+      "react-hooks/set-state-in-effect": "warn",
+    },
   },
 ];
 
