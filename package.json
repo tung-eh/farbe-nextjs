@@ -18,6 +18,8 @@
     "@prismicio/client": "^7.21.0",
     "@prismicio/next": "^2.0.2",
     "@prismicio/react": "^3.2.2",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.4.2",
     "@stripe/react-stripe-js": "^5.4.1",
     "@stripe/stripe-js": "^8.6.0",
     "@tailwindcss/postcss": "^4.1.18",
@@ -30,7 +32,8 @@
     "react-dom": "19.2.3",
     "stripe": "^20.1.0",
     "tailwind-merge": "^3.4.0",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.1.18",
+    "three": "^0.182.0"
   },
   "devDependencies": {
     "@slicemachine/adapter-next": "^0.3.90",
