@@ -18,6 +18,7 @@ const Picture: FC<PictureProps> = ({ slice }) => {
       <figure className="contents">
         <PrismicNextImage
           field={slice.primary.picture}
+          alt=""
           className="row-span-2 z-20"
         />
         <SlideIn
@@ -41,6 +42,7 @@ const Picture: FC<PictureProps> = ({ slice }) => {
         >
           <PrismicNextImage
             field={slice.primary.secondary_picture}
+            alt=""
             className="z-20"
           />
           <SlideIn as="figcaption" className="px-4 pt-4 pb-16 rich-text">
