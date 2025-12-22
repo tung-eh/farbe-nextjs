@@ -2,13 +2,13 @@
 
 import { SoftShadows, Environment } from "@react-three/drei";
 
+import Model from "./Model";
+
 const Scene = () => {
   return (
     <>
-      <mesh castShadow>
-        <torusGeometry args={[1, 0.5, 16, 32]} />
-        <meshStandardMaterial color="orange" />
-      </mesh>
+      <Model src="/canister/canister.gltf" scale={100} />
+
       <mesh receiveShadow position={[0, 0, -4]}>
         <planeGeometry args={[400, 400, 10, 10]} />
         <meshStandardMaterial color="#ffffff" roughness={0.5} metalness={0.5} />
