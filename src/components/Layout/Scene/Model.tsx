@@ -1,5 +1,5 @@
 import { useEffect, JSX } from "react";
-import { MeshStandardMaterial, SRGBColorSpace } from "three";
+import { Mesh, MeshStandardMaterial, SRGBColorSpace } from "three";
 import { useGLTF, useTexture } from "@react-three/drei";
 
 const Model = ({
@@ -13,6 +13,14 @@ const Model = ({
   metalnessMap: string;
 } & Omit<JSX.IntrinsicElements["primitive"], "scene" | "scale">) => {
   const { scene, materials } = useGLTF(src);
+
+  useEffect(() => {
+    scene.traverse((child) => {
+      if (child instanceof Mesh) {
+        child.castShadow = true;
+      }
+    });
+  }, [scene]);
 
   const [map, metalnessMap] = useTexture(
     [mapSrc, metalnessMapSrc],
