@@ -1,4 +1,6 @@
-import { useLocalStorage } from "@uidotdev/usehooks";
+"use client";
+
+import { useLocalStorage, useIsMounted } from "usehooks-ts";
 import { produce } from "immer";
 
 import { StripeProduct } from "@/lib/getStripeProducts";
@@ -13,7 +15,13 @@ type CartItems = Record<string, CartItem>;
 const LOCAL_STORAGE_KEY = "fabre-cart";
 
 export const useCart = () => {
-  const [items, setItems] = useLocalStorage<CartItems>(LOCAL_STORAGE_KEY, {});
+  const [itemsState, setItems] = useLocalStorage<CartItems>(
+    LOCAL_STORAGE_KEY,
+    {},
+  );
+
+  const isMounted = useIsMounted()();
+  const items = isMounted ? itemsState : {};
 
   const totalPrice = Object.values(items).reduce(
     (sum, item) => sum + item.product.price * item.quantity,
