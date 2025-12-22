@@ -2,7 +2,8 @@
 
 import { useState, useEffect, ReactNode } from "react";
 import { Canvas as R3fCanvas } from "@react-three/fiber";
-import { PerspectiveCamera } from "@react-three/drei";
+
+import { PerspectiveCamera, OrbitControls } from "@react-three/drei";
 import { twMerge } from "tailwind-merge";
 
 const Canvas = ({
@@ -26,18 +27,10 @@ const Canvas = ({
         className,
       )}
     >
-      <R3fCanvas>
-        <PerspectiveCamera
-          makeDefault
-          fov={45}
-          position={[0, 0, 20]}
-          lookAt={[0, 0, 0]}
-        />
-
+      <R3fCanvas shadows>
+        <OrbitControls target={[0, 0, 0]} />
+        <PerspectiveCamera makeDefault fov={45} position={[0, 0, 20]} />
         {children}
-
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[5, 5, 5]} />
       </R3fCanvas>
     </figure>
   );
