@@ -7,7 +7,11 @@ import Model from "./Model";
 const Scene = () => {
   return (
     <>
-      <Model src="/canister/canister.gltf" scale={100} />
+      <Model
+        src="/canister/canister.gltf"
+        map={`/textures/200-color-min.jpg`}
+        metalnessMap={`/textures/200-metallic-min.jpg`}
+      />
 
       <mesh receiveShadow position={[0, 0, -4]}>
         <planeGeometry args={[400, 400, 10, 10]} />
