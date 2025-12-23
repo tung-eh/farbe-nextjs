@@ -29,9 +29,11 @@ const Canvas = ({
     >
       <R3fCanvas
         shadows
-        output-color-space={SRGBColorSpace}
-        tone-mapping={ACESFilmicToneMapping}
-        tone-mapping-exposure={3}
+        gl={{
+          outputColorSpace: SRGBColorSpace,
+          toneMapping: ACESFilmicToneMapping,
+          toneMappingExposure: 3,
+        }}
       >
         <OrbitControls target={[0, 0, 0]} />
         <PerspectiveCamera makeDefault fov={45} position={[0, 0, 20]} />

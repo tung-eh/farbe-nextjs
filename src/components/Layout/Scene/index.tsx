@@ -17,7 +17,7 @@ const Scene = () => {
       <directionalLight
         castShadow
         position={[-8, 6, 20]}
-        intensity={1}
+        intensity={0.5}
         shadow-mapSize={[512, 512]}
         shadow-camera-left={-16}
         shadow-camera-right={16}
