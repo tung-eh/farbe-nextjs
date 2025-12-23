@@ -2,16 +2,12 @@
 
 import { SoftShadows, Environment } from "@react-three/drei";
 
-import Model from "./Model";
+import FilmCanister from "./FilmCanister";
 
 const Scene = () => {
   return (
     <>
-      <Model
-        src="/canister/canister.gltf"
-        map={`/textures/200-color-min.jpg`}
-        metalnessMap={`/textures/200-metallic-min.jpg`}
-      />
+      <FilmCanister model="800" />
 
       <mesh receiveShadow position={[0, 0, -4]}>
         <planeGeometry args={[400, 400, 10, 10]} />
@@ -21,7 +17,7 @@ const Scene = () => {
       <directionalLight
         castShadow
         position={[-8, 6, 20]}
-        intensity={0.5}
+        intensity={1}
         shadow-mapSize={[512, 512]}
         shadow-camera-left={-16}
         shadow-camera-right={16}
