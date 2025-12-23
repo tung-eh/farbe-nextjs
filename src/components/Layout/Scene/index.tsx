@@ -1,13 +1,15 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Group } from "three";
 import { SoftShadows, Environment, Float } from "@react-three/drei";
 import gsap from "gsap";
 
 import FilmCanister from "./FilmCanister";
+import FilmPackaging from "./FilmPackaging";
 
 const Scene = () => {
+  const [activeModel] = useState<"100" | "200" | "400" | "800">("400");
   const canisterRef = useRef<Group>(null);
 
   useEffect(() => {
@@ -25,9 +27,17 @@ const Scene = () => {
 
   return (
     <>
-      <Float>
+      <Float position={[1.5, 2.5, 0]}>
         <group ref={canisterRef}>
-          <FilmCanister model="800" rotation={[0, 0, Math.PI / 8]} />
+          <FilmCanister model={activeModel} rotation={[0, 0, Math.PI / 8]} />
+        </group>
+      </Float>
+      <Float position={[-1.5, -2.5, 0]}>
+        <group>
+          <FilmPackaging
+            model={activeModel}
+            rotation={[-Math.PI / 2, 0, Math.PI / 3]}
+          />
         </group>
       </Float>
 
