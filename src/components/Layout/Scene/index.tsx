@@ -1,13 +1,17 @@
 "use client";
 
-import { SoftShadows, Environment } from "@react-three/drei";
+import { SoftShadows, Environment, Float } from "@react-three/drei";
 
 import FilmCanister from "./FilmCanister";
 
 const Scene = () => {
   return (
     <>
-      <FilmCanister model="800" />
+      <Float>
+        <group>
+          <FilmCanister model="800" />
+        </group>
+      </Float>
 
       <mesh receiveShadow position={[0, 0, -4]}>
         <planeGeometry args={[400, 400, 10, 10]} />
