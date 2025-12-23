@@ -1,15 +1,33 @@
 "use client";
 
+import { useRef, useEffect } from "react";
+import { Group } from "three";
 import { SoftShadows, Environment, Float } from "@react-three/drei";
+import gsap from "gsap";
 
 import FilmCanister from "./FilmCanister";
 
 const Scene = () => {
+  const canisterRef = useRef<Group>(null);
+
+  useEffect(() => {
+    const updateCanisterRotation = () => {
+      if (canisterRef.current) {
+        canisterRef.current.rotation.y =
+          Math.PI / 4 - (Math.sin(gsap.ticker.time * 0.25) * Math.PI) / 2;
+      }
+    };
+
+    gsap.ticker.add(updateCanisterRotation);
+
+    return () => gsap.ticker.remove(updateCanisterRotation);
+  }, []);
+
   return (
     <>
       <Float>
-        <group>
-          <FilmCanister model="800" />
+        <group ref={canisterRef}>
+          <FilmCanister model="800" rotation={[0, 0, Math.PI / 8]} />
         </group>
       </Float>
 
