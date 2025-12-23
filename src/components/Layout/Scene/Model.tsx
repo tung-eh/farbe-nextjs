@@ -2,6 +2,9 @@ import { useEffect, JSX } from "react";
 import { Mesh, MeshStandardMaterial, SRGBColorSpace } from "three";
 import { useGLTF, useTexture } from "@react-three/drei";
 
+export const isNotUndefined = <T,>(value: T | undefined): value is T =>
+  value !== undefined;
+
 const Model = ({
   src,
   map: mapSrc,
@@ -10,7 +13,7 @@ const Model = ({
 }: {
   src: string;
   map: string;
-  metalnessMap: string;
+  metalnessMap?: string;
 } & Omit<JSX.IntrinsicElements["primitive"], "scene" | "scale">) => {
   const { scene, materials } = useGLTF(src);
 
@@ -23,7 +26,7 @@ const Model = ({
   }, [scene]);
 
   const [map, metalnessMap] = useTexture(
-    [mapSrc, metalnessMapSrc],
+    [mapSrc, metalnessMapSrc].filter(isNotUndefined),
     (textures) => {
       textures.forEach((texture) => {
         if (texture) {
