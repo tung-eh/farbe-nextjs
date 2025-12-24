@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { Suspense, ReactNode } from "react";
 
 import type { SettingsDocument } from "@root/prismicio-types";
 
@@ -17,7 +17,9 @@ const Layout = ({
 }) => {
   return (
     <body>
-      <ClearCart />
+      <Suspense>
+        <ClearCart />
+      </Suspense>
       <Header settings={settings} />
       {children}
       <Footer settings={settings} />
