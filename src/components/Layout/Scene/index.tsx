@@ -12,7 +12,7 @@ import AbsoluteGroup from "./AbsoluteGroup";
 
 const Scene = () => {
   const { width } = useWindowSize();
-  const [activeModel] = useState<"100" | "200" | "400" | "800">("400");
+  const [activeModel] = useState<"100" | "200" | "400" | "800">("800");
   const canisterRef = useRef<Group>(null);
 
   useEffect(() => {
