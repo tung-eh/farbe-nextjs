@@ -21,7 +21,7 @@ const Layout = ({
       <Header settings={settings} />
       {children}
       <Footer settings={settings} />
-      <Canvas className="fixed inset-0 h-screen z-1">
+      <Canvas className="fixed inset-0 h-screen -z-1">
         <Scene />
       </Canvas>
     </body>
