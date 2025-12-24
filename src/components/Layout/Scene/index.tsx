@@ -8,6 +8,7 @@ import { useWindowSize } from "usehooks-ts";
 
 import FilmCanister from "./FilmCanister";
 import FilmPackaging from "./FilmPackaging";
+import AbsoluteGroup from "./AbsoluteGroup";
 
 const Scene = () => {
   const { width } = useWindowSize();
@@ -30,15 +31,15 @@ const Scene = () => {
   const options =
     width >= 1280
       ? {
-          position: [-4, 0, 0] as const,
+          x: 0.33,
         }
       : {
-          position: [0, 0, 0] as const,
+          x: 0.5,
         };
 
   return (
     <>
-      <group position={options.position}>
+      <AbsoluteGroup x={options.x} distance={20}>
         <Float position={[1.5, 2.5, 0]}>
           <group ref={canisterRef}>
             <FilmCanister model={activeModel} rotation={[0, 0, Math.PI / 8]} />
@@ -52,7 +53,7 @@ const Scene = () => {
             />
           </group>
         </Float>
-      </group>
+      </AbsoluteGroup>
 
       <mesh receiveShadow position={[0, 0, -4]}>
         <planeGeometry args={[400, 400, 10, 10]} />
