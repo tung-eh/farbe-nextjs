@@ -4,11 +4,13 @@ import { useRef, useState, useEffect } from "react";
 import { Group } from "three";
 import { SoftShadows, Environment, Float } from "@react-three/drei";
 import gsap from "gsap";
+import { useWindowSize } from "usehooks-ts";
 
 import FilmCanister from "./FilmCanister";
 import FilmPackaging from "./FilmPackaging";
 
 const Scene = () => {
+  const { width } = useWindowSize();
   const [activeModel] = useState<"100" | "200" | "400" | "800">("400");
   const canisterRef = useRef<Group>(null);
 
@@ -25,21 +27,32 @@ const Scene = () => {
     return () => gsap.ticker.remove(updateCanisterRotation);
   }, []);
 
+  const options =
+    width >= 1280
+      ? {
+          position: [-4, 0, 0] as const,
+        }
+      : {
+          position: [0, 0, 0] as const,
+        };
+
   return (
     <>
-      <Float position={[1.5, 2.5, 0]}>
-        <group ref={canisterRef}>
-          <FilmCanister model={activeModel} rotation={[0, 0, Math.PI / 8]} />
-        </group>
-      </Float>
-      <Float position={[-1.5, -2.5, 0]}>
-        <group>
-          <FilmPackaging
-            model={activeModel}
-            rotation={[-Math.PI / 2, 0, Math.PI / 3]}
-          />
-        </group>
-      </Float>
+      <group position={options.position}>
+        <Float position={[1.5, 2.5, 0]}>
+          <group ref={canisterRef}>
+            <FilmCanister model={activeModel} rotation={[0, 0, Math.PI / 8]} />
+          </group>
+        </Float>
+        <Float position={[-1.5, -2.5, 0]}>
+          <group>
+            <FilmPackaging
+              model={activeModel}
+              rotation={[-Math.PI / 2, 0, Math.PI / 3]}
+            />
+          </group>
+        </Float>
+      </group>
 
       <mesh receiveShadow position={[0, 0, -4]}>
         <planeGeometry args={[400, 400, 10, 10]} />
