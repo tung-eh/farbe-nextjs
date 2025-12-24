@@ -1,27 +1,23 @@
 "use client";
 
-import { useRef, ElementType, ReactNode } from "react";
+import { useRef, createElement, JSX } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 
 gsap.registerPlugin(ScrollTrigger);
 
-type SlideInProps<T extends ElementType> = {
+type SlideInProps<T extends keyof JSX.IntrinsicElements> = {
   as?: T;
-  children: ReactNode;
   scrollTrigger?: ScrollTrigger.Vars;
-} & React.ComponentPropsWithoutRef<T>;
+} & Omit<JSX.IntrinsicElements[T], "ref">;
 
-const SlideIn = <T extends ElementType = "section">({
+const SlideIn = <T extends keyof JSX.IntrinsicElements = "section">({
   as,
-  children,
-  className,
   scrollTrigger,
   ...props
 }: SlideInProps<T>) => {
   const ref = useRef<HTMLElement>(null);
-  const Component: ElementType = as ?? "section";
 
   useGSAP(() => {
     if (!ref.current) return;
@@ -41,11 +37,11 @@ const SlideIn = <T extends ElementType = "section">({
     });
   });
 
-  return (
-    <Component ref={ref} className={className} {...props}>
-      {children}
-    </Component>
-  );
+  // eslint-disable-next-line react-hooks/refs
+  return createElement(as ?? "section", {
+    ref,
+    ...props,
+  });
 };
 
 export default SlideIn;
