@@ -3,7 +3,7 @@
 import { useState, useEffect, ReactNode } from "react";
 import { SRGBColorSpace, ACESFilmicToneMapping } from "three";
 import { Canvas as R3fCanvas } from "@react-three/fiber";
-import { PerspectiveCamera, OrbitControls } from "@react-three/drei";
+import { PerspectiveCamera } from "@react-three/drei";
 import { twMerge } from "tailwind-merge";
 
 const Canvas = ({
@@ -35,7 +35,6 @@ const Canvas = ({
           toneMappingExposure: 3,
         }}
       >
-        <OrbitControls target={[0, 0, 0]} />
         <PerspectiveCamera makeDefault fov={45} position={[0, 0, 20]} />
         {children}
       </R3fCanvas>
