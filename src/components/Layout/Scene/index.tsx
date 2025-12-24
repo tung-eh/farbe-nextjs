@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { Group } from "three";
 import { SoftShadows, Environment, Float } from "@react-three/drei";
 import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { useWindowSize } from "usehooks-ts";
 
 import FilmCanister from "./FilmCanister";
@@ -14,6 +15,7 @@ const Scene = () => {
   const { width } = useWindowSize();
   const [activeModel] = useState<"100" | "200" | "400" | "800">("800");
   const canisterRef = useRef<Group>(null);
+  const packagingRef = useRef<Group>(null);
 
   useEffect(() => {
     const updateCanisterRotation = () => {
@@ -27,6 +29,23 @@ const Scene = () => {
 
     return () => gsap.ticker.remove(updateCanisterRotation);
   }, []);
+
+  useGSAP(() => {
+    if (!canisterRef.current || !packagingRef.current) return;
+
+    const canisterPosition = canisterRef.current.position;
+    const packagingPosition = packagingRef.current.position;
+
+    if (window.scrollY < 20) {
+      gsap.from([canisterPosition, packagingPosition], {
+        y: -12,
+        delay: 0.3,
+        duration: 1,
+        ease: "power2.out",
+        stagger: 0.2,
+      });
+    }
+  });
 
   const options =
     width >= 1280
@@ -52,7 +71,7 @@ const Scene = () => {
           </group>
         </Float>
         <Float position={options.packagingPosition} scale={options.scale}>
-          <group>
+          <group ref={packagingRef}>
             <FilmPackaging
               model={activeModel}
               rotation={[-Math.PI / 2, 0, Math.PI / 3]}
