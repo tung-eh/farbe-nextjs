@@ -30,22 +30,26 @@ const Scene = () => {
 
   const options =
     width >= 1280
-      ? {
+      ? ({
           x: 0.33,
-        }
-      : {
+          canisterPosition: [1.5, 2.5, 0],
+          packagingPosition: [-1.5, -2.5, 0],
+        } as const)
+      : ({
           x: 0.5,
-        };
+          canisterPosition: [2.5, 4.5, 0],
+          packagingPosition: [-2.5, -5, 0],
+        } as const);
 
   return (
     <>
       <AbsoluteGroup x={options.x} distance={20}>
-        <Float position={[1.5, 2.5, 0]}>
+        <Float position={options.canisterPosition}>
           <group ref={canisterRef}>
             <FilmCanister model={activeModel} rotation={[0, 0, Math.PI / 8]} />
           </group>
         </Float>
-        <Float position={[-1.5, -2.5, 0]}>
+        <Float position={options.packagingPosition}>
           <group>
             <FilmPackaging
               model={activeModel}
