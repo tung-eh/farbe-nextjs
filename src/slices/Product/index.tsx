@@ -52,7 +52,7 @@ const Product: FC<ProductProps> = ({ slice, context }) => {
       data-slice-variation={slice.variation}
       className="bounded min-h-[150vh] flex flex-col justify-center"
     >
-      <header id={product.uid} className="rich-text">
+      <header id={product.uid} className="rich-text pt-[25vh]">
         <PrismicRichText field={product.data.name} />
         <p aria-label="Price">{formatPrice(product.stripe.price)} / roll</p>
       </header>
