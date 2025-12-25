@@ -1,10 +1,11 @@
 "use client";
 
 import { FC } from "react";
-import { Content } from "@prismicio/client";
+import { isFilled, Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 
 import formatPrice from "@/lib/formatPrice";
+import getSceneAttributes from "@/lib/getSceneAttributes";
 import { useCart } from "@/states/cart";
 import SlideIn from "@/atoms/SlideIn";
 
@@ -21,6 +22,12 @@ const Cart: FC<CartProps> = ({ slice }) => {
       id="cart"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      {...getSceneAttributes({
+        position: "center",
+        model: isFilled.contentRelationship(slice.primary.product)
+          ? slice.primary.product.uid
+          : undefined,
+      })}
       className="bounded rich-text min-h-screen"
     >
       <PrismicRichText field={slice.primary.title} />

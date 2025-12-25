@@ -1,9 +1,10 @@
-import { type FC } from "react";
-import { type Content } from "@prismicio/client";
+import { FC } from "react";
+import { isFilled, Content } from "@prismicio/client";
 import { PrismicRichText, type SliceComponentProps } from "@prismicio/react";
 import { PrismicNextLink } from "@prismicio/next";
 import { twMerge } from "tailwind-merge";
 
+import getSceneAttributes from "@/lib/getSceneAttributes";
 import SlideIn from "@/atoms/SlideIn";
 
 type RichTextProps = SliceComponentProps<Content.RichTextSlice>;
@@ -13,6 +14,12 @@ const RichText: FC<RichTextProps> = ({ slice }) => {
 
   return (
     <SlideIn
+      {...getSceneAttributes({
+        position: "center",
+        model: isFilled.contentRelationship(slice.primary.product)
+          ? slice.primary.product.uid
+          : undefined,
+      })}
       className={twMerge(
         "bounded rich-text flex flex-col justify-center",
         slice.variation === "fullscreen" ? "min-h-screen" : "min-h-[40vh]",

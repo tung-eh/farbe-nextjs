@@ -4,6 +4,7 @@ import { PrismicRichText, type SliceComponentProps } from "@prismicio/react";
 import { PrismicNextImage } from "@prismicio/next";
 import { twMerge } from "tailwind-merge";
 
+import getSceneAttributes from "@/lib/getSceneAttributes";
 import SlideIn from "@/atoms/SlideIn";
 
 export type PictureProps = SliceComponentProps<Content.PictureSlice>;
@@ -13,6 +14,12 @@ const Picture: FC<PictureProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      {...getSceneAttributes({
+        position: "top",
+        model: isFilled.contentRelationship(slice.primary.product)
+          ? slice.primary.product.uid
+          : undefined,
+      })}
       className="grid xl:grid-cols-[3fr_2fr]"
     >
       <figure className="contents">

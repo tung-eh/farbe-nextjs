@@ -6,9 +6,10 @@ import {
   SliceComponentProps,
 } from "@prismicio/react";
 
-import SlideIn from "@/atoms/SlideIn";
 import { StripeProduct } from "@/lib/getStripeProducts";
 import formatPrice from "@/lib/formatPrice";
+import getSceneAttributes from "@/lib/getSceneAttributes";
+import SlideIn from "@/atoms/SlideIn";
 
 import AddToCart from "./AddToCart";
 
@@ -50,6 +51,11 @@ const Product: FC<ProductProps> = ({ slice, context }) => {
       }}
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      {...getSceneAttributes({
+        position: "center",
+        model: product.uid,
+        rotate: true,
+      })}
       className="bounded min-h-[150vh] flex flex-col justify-center"
     >
       <header id={product.uid} className="rich-text pt-[25vh]">

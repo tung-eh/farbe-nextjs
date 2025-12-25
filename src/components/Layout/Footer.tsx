@@ -1,6 +1,7 @@
 import { PrismicRichText } from "@prismicio/react";
 
 import type { SettingsDocument } from "@root/prismicio-types";
+import getSceneAttributes from "@/lib/getSceneAttributes";
 import SlideIn from "@/atoms/SlideIn";
 
 import BrandLogo from "./BrandLogo";
@@ -8,7 +9,10 @@ import BrandSignature from "./BrandSignature";
 
 const Footer = ({ settings }: { settings: SettingsDocument }) => {
   return (
-    <footer className="relative z-20 bg-black text-white">
+    <footer
+      {...getSceneAttributes({ position: "top" })}
+      className="relative z-20 bg-black text-white"
+    >
       <figure className="absolute inset-0">
         <BrandLogo className="h-screen w-full xl:w-auto" />
       </figure>
