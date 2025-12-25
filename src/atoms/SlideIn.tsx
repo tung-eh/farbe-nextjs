@@ -26,8 +26,6 @@ const SlideIn = <T extends keyof JSX.IntrinsicElements = "section">({
   useGSAP(() => {
     if (!ref.current) return;
 
-    setIsAnimated(false);
-
     gsap.to(ref.current.children, {
       opacity: 1,
       y: 0,
