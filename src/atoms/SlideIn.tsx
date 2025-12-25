@@ -38,11 +38,12 @@ const SlideIn = <T extends keyof JSX.IntrinsicElements = "section">({
         ...scrollTrigger,
       },
     });
-  });
+  }, [ref.current?.children]); // eslint-disable-line react-hooks/refs
 
   // eslint-disable-next-line react-hooks/refs
   return createElement(as ?? "section", {
     ref,
+
     className: twMerge("[&>*]:opacity-0 [&>*]:translate-y-[50px]", className),
     ...props,
   });
