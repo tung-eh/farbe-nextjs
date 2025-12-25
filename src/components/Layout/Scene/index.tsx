@@ -6,7 +6,9 @@ import { Group } from "three";
 import { SoftShadows, Environment, Float } from "@react-three/drei";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useWindowSize } from "usehooks-ts";
+import { useWindowSize, useIsMounted } from "usehooks-ts";
+
+import { useCart } from "@/states/cart";
 
 import FilmCanister from "./FilmCanister";
 import FilmPackaging from "./FilmPackaging";
@@ -15,14 +17,20 @@ import AbsoluteGroup from "./AbsoluteGroup";
 const Scene = () => {
   const pathname = usePathname();
   const { width } = useWindowSize();
-  const [activeModel] = useState<"100" | "200" | "400" | "800">("800");
+  const isMounted = useIsMounted()();
   const canisterRef = useRef<Group>(null);
+  const canisterModelRef = useRef<Group>(null);
   const packagingRef = useRef<Group>(null);
+  const lastTotalItems = useRef<number>(Infinity);
+
+  const { totalItems } = useCart();
+
+  const [activeModel] = useState<"100" | "200" | "400" | "800">("800");
 
   useEffect(() => {
     const updateCanisterRotation = () => {
-      if (canisterRef.current) {
-        canisterRef.current.rotation.y =
+      if (canisterModelRef.current) {
+        canisterModelRef.current.rotation.y =
           Math.PI / 4 - (Math.sin(gsap.ticker.time * 0.25) * Math.PI) / 2;
       }
     };
@@ -48,6 +56,26 @@ const Scene = () => {
     }
   }, [pathname]);
 
+  useGSAP(() => {
+    if (!isMounted || !canisterRef.current || !packagingRef.current) return;
+
+    const canisterRotation = canisterRef.current.rotation;
+    const packagingRotation = packagingRef.current.rotation;
+
+    console.log({ canisterRotation, packagingRotation });
+
+    if (totalItems > lastTotalItems.current) {
+      gsap.to([canisterRotation, packagingRotation], {
+        y: `+=${Math.PI * 2}`,
+        duration: 0.8,
+        stagger: 0.05,
+        ease: "power2.inOut",
+      });
+    }
+
+    lastTotalItems.current = totalItems;
+  }, [totalItems]);
+
   const options =
     width >= 1280
       ? ({
@@ -68,7 +96,11 @@ const Scene = () => {
       <AbsoluteGroup x={options.x} distance={20}>
         <Float position={options.canisterPosition} scale={options.scale}>
           <group ref={canisterRef}>
-            <FilmCanister model={activeModel} rotation={[0, 0, Math.PI / 8]} />
+            <FilmCanister
+              ref={canisterModelRef}
+              model={activeModel}
+              rotation={[0, 0, Math.PI / 8]}
+            />
           </group>
         </Float>
         <Float position={options.packagingPosition} scale={options.scale}>
