@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useRef, useState, useEffect } from "react";
 import { Group } from "three";
 import { SoftShadows, Environment, Float } from "@react-three/drei";
@@ -12,6 +13,7 @@ import FilmPackaging from "./FilmPackaging";
 import AbsoluteGroup from "./AbsoluteGroup";
 
 const Scene = () => {
+  const pathname = usePathname();
   const { width } = useWindowSize();
   const [activeModel] = useState<"100" | "200" | "400" | "800">("800");
   const canisterRef = useRef<Group>(null);
@@ -44,7 +46,7 @@ const Scene = () => {
         stagger: 0.2,
       });
     }
-  });
+  }, [pathname]);
 
   const options =
     width >= 1280
