@@ -29,7 +29,7 @@ const Cart: FC<CartProps> = ({ slice }) => {
           <PrismicRichText field={slice.primary.content} />
           <ul className="!mt-16">
             {Object.values(items).map(({ product, quantity }) => (
-              <li key={product.id} className="flex items-center">
+              <li key={product.id} className="flex items-center !mt-0">
                 <span className="flex-1">{product.name}</span>
                 <span
                   aria-label={`Quantity of ${product.name}`}
