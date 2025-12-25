@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, createElement, JSX } from "react";
+import { useState, useRef, createElement, JSX } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
@@ -21,9 +21,12 @@ const SlideIn = <T extends keyof JSX.IntrinsicElements = "section">({
   ...props
 }: SlideInProps<T>) => {
   const ref = useRef<HTMLElement>(null);
+  const [isAnimated, setIsAnimated] = useState(false);
 
   useGSAP(() => {
     if (!ref.current) return;
+
+    setIsAnimated(false);
 
     gsap.to(ref.current.children, {
       opacity: 1,
@@ -37,14 +40,17 @@ const SlideIn = <T extends keyof JSX.IntrinsicElements = "section">({
         start: "top bottom-=25%",
         ...scrollTrigger,
       },
+      onComplete: () => setIsAnimated(true),
     });
   }, [ref.current?.children]); // eslint-disable-line react-hooks/refs
 
   // eslint-disable-next-line react-hooks/refs
   return createElement(as ?? "section", {
     ref,
-
-    className: twMerge("[&>*]:opacity-0 [&>*]:translate-y-[50px]", className),
+    className: twMerge(
+      !isAnimated && "[&>*]:opacity-0 [&>*]:translate-y-[50px]",
+      className,
+    ),
     ...props,
   });
 };
