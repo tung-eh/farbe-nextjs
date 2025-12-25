@@ -324,6 +324,16 @@ export interface CartSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/rich-text
    */
   empty_content: prismic.RichTextField;
+
+  /**
+   * Product field in *Cart → Default → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cart.default.primary.product
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  product: prismic.ContentRelationshipField<"product">;
 }
 
 /**
@@ -396,6 +406,16 @@ export interface PictureSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/rich-text
    */
   secondary_caption: prismic.RichTextField;
+
+  /**
+   * Product field in *Picture → Default → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: picture.default.primary.product
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  product: prismic.ContentRelationshipField<"product">;
 }
 
 /**
@@ -454,6 +474,16 @@ export interface PictureSliceTopPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/rich-text
    */
   secondary_caption: prismic.RichTextField;
+
+  /**
+   * Product field in *Picture → Top → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: picture.top.primary.product
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  product: prismic.ContentRelationshipField<"product">;
 }
 
 /**
@@ -512,6 +542,16 @@ export interface PictureSliceBottomPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/rich-text
    */
   secondary_caption: prismic.RichTextField;
+
+  /**
+   * Product field in *Picture → Bottom → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: picture.bottom.primary.product
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  product: prismic.ContentRelationshipField<"product">;
 }
 
 /**
@@ -640,6 +680,16 @@ export interface RichTextSliceDefaultPrimary {
       "Primary" | "Text" | "Outline"
     >
   >;
+
+  /**
+   * Product field in *RichText → Default → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: rich_text.default.primary.product
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  product: prismic.ContentRelationshipField<"product">;
 }
 
 /**
@@ -696,6 +746,16 @@ export interface RichTextSliceFullscreenPrimary {
       "Primary" | "Text" | "Outline"
     >
   >;
+
+  /**
+   * Product field in *RichText → Fullscreen → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: rich_text.fullscreen.primary.product
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  product: prismic.ContentRelationshipField<"product">;
 }
 
 /**

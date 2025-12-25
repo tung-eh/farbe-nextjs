@@ -44,6 +44,17 @@
               "Outline"
             ]
           }
+        },
+        "product": {
+          "type": "Link",
+          "config": {
+            "label": "Product",
+            "select": "document",
+            "repeat": false,
+            "customtypes": [
+              "product"
+            ]
+          }
         }
       },
       "items": {},
@@ -87,6 +98,17 @@
               "Primary",
               "Text",
               "Outline"
+            ]
+          }
+        },
+        "product": {
+          "type": "Link",
+          "config": {
+            "label": "Product",
+            "select": "document",
+            "repeat": false,
+            "customtypes": [
+              "product"
             ]
           }
         }

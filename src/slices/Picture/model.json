@@ -45,6 +45,17 @@
             "allowTargetBlank": true,
             "multi": "paragraph,strong,em,hyperlink"
           }
+        },
+        "product": {
+          "type": "Link",
+          "config": {
+            "label": "Product",
+            "select": "document",
+            "repeat": false,
+            "customtypes": [
+              "product"
+            ]
+          }
         }
       },
       "items": {}
@@ -90,6 +101,17 @@
             "allowTargetBlank": true,
             "multi": "paragraph,strong,em,hyperlink"
           }
+        },
+        "product": {
+          "type": "Link",
+          "config": {
+            "label": "Product",
+            "select": "document",
+            "repeat": false,
+            "customtypes": [
+              "product"
+            ]
+          }
         }
       },
       "items": {}
@@ -134,6 +156,17 @@
             "placeholder": "",
             "allowTargetBlank": true,
             "multi": "paragraph,strong,em,hyperlink"
+          }
+        },
+        "product": {
+          "type": "Link",
+          "config": {
+            "label": "Product",
+            "select": "document",
+            "repeat": false,
+            "customtypes": [
+              "product"
+            ]
           }
         }
       },

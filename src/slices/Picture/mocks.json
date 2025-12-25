@@ -70,6 +70,14 @@
 						}
 					}
 				]
+			},
+			"product": {
+				"key": "984462da-185d-4281-90dc-99d8995dd647",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "DocumentLink",
+					"id": "mock_document_id"
+				}
 			}
 		},
 		"items": []
@@ -145,6 +153,14 @@
 						}
 					}
 				]
+			},
+			"product": {
+				"key": "bf75aa49-41d7-40b9-97fe-350fb69e1e56",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "DocumentLink",
+					"id": "mock_document_id"
+				}
 			}
 		},
 		"items": [
@@ -159,7 +175,6 @@
 		"variation": "bottom",
 		"primary": {
 			"picture": {
-				"__TYPE__": "ImageContent",
 				"provider": "imgix",
 				"url": "https://images.unsplash.com/photo-1519666336592-e225a99dcd2f?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwxMnx8YWlycGxhbmV8ZW58MHx8fHwxNzY2MDQwNTEyfDA&ixlib=rb-4.1.0&q=85",
 				"alt": "aerial photo of airplane wings during daytime",
@@ -179,6 +194,8 @@
 						"y": 0
 					}
 				},
+				"credits": null,
+				"__TYPE__": "ImageContent",
 				"thumbnails": {}
 			},
 			"caption": {
@@ -193,7 +210,6 @@
 				]
 			},
 			"secondary_picture": {
-				"__TYPE__": "ImageContent",
 				"provider": "imgix",
 				"url": "https://images.unsplash.com/photo-1569629743817-70d8db6c323b?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHw0fHxhaXJwbGFuZXxlbnwwfHx8fDE3NjYwNDA1MTJ8MA&ixlib=rb-4.1.0&q=85",
 				"alt": "white airplane on mid air",
@@ -213,6 +229,8 @@
 						"y": 0
 					}
 				},
+				"credits": null,
+				"__TYPE__": "ImageContent",
 				"thumbnails": {}
 			},
 			"secondary_caption": {
@@ -225,6 +243,14 @@
 						}
 					}
 				]
+			},
+			"product": {
+				"__TYPE__": "LinkContent",
+				"key": "74a9704a-50f8-46c7-ae64-b173a80f426b",
+				"value": {
+					"__TYPE__": "DocumentLink",
+					"id": "mock_document_id"
+				}
 			}
 		},
 		"items": [
