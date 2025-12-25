@@ -22,7 +22,7 @@ const Canvas = ({
   return (
     <figure
       className={twMerge(
-        "opacity-0 transition-opacity delay-300 duration-1000 ease-in-out",
+        "opacity-0 transition-opacity delay-500 duration-1000 ease-in-out",
         isMounted && "opacity-100",
         className,
       )}

@@ -39,7 +39,6 @@ const Scene = () => {
     if (window.scrollY < 20) {
       gsap.from([canisterPosition, packagingPosition], {
         y: -12,
-        delay: 0.3,
         duration: 1,
         ease: "power2.out",
         stagger: 0.2,
