@@ -60,11 +60,13 @@ const Scene = () => {
           y: position === "center" ? 0 : 24,
           stagger: 0.05,
           ease: "power2.inOut",
+          repeatRefresh: true,
           scrollTrigger: {
             trigger: section,
             start: position === "center" ? "top+=40% bottom" : "top bottom",
             end: position === "center" ? "top+=90% bottom" : "top+=50% bottom",
             scrub: true,
+            invalidateOnRefresh: true,
           },
         });
       });
