@@ -46,13 +46,40 @@ const Scene = () => {
     const canisterPosition = canisterRef.current.position;
     const packagingPosition = packagingRef.current.position;
 
+    const animateOnScroll = () => {
+      const sections = document.querySelectorAll<HTMLElement>(
+        "[data-scene-position]",
+      );
+
+      sections.forEach((section) => {
+        const model = section.dataset.sceneModel;
+        const position = section.dataset.scenePosition;
+        const shouldRotate = section.dataset.sceneRotate;
+
+        gsap.to([canisterPosition, packagingPosition], {
+          y: position === "center" ? 0 : 24,
+          stagger: 0.05,
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: section,
+            start: position === "center" ? "top+=40% bottom" : "top bottom",
+            end: position === "center" ? "top+=90% bottom" : "top+=50% bottom",
+            scrub: true,
+          },
+        });
+      });
+    };
+
     if (window.scrollY < 20) {
       gsap.from([canisterPosition, packagingPosition], {
         y: -12,
         duration: 1,
         ease: "power2.out",
         stagger: 0.2,
+        onComplete: animateOnScroll,
       });
+    } else {
+      animateOnScroll();
     }
   }, [pathname]);
 
@@ -61,8 +88,6 @@ const Scene = () => {
 
     const canisterRotation = canisterRef.current.rotation;
     const packagingRotation = packagingRef.current.rotation;
-
-    console.log({ canisterRotation, packagingRotation });
 
     if (totalItems > lastTotalItems.current) {
       gsap.to([canisterRotation, packagingRotation], {
