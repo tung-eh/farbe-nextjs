@@ -1,9 +1,38 @@
 import { useEffect, JSX } from "react";
-import { Mesh, MeshStandardMaterial, SRGBColorSpace } from "three";
-import { useGLTF, useTexture } from "@react-three/drei";
+import {
+  Mesh,
+  MeshStandardMaterial,
+  SRGBColorSpace,
+  Texture,
+  TextureLoader,
+} from "three";
+import { useGLTF } from "@react-three/drei";
 
 export const isNotUndefined = <T,>(value: T | undefined): value is T =>
   value !== undefined;
+
+function loadTexture(url?: string): Promise<Texture | null> {
+  if (!url) return Promise.resolve(null);
+
+  return new Promise<Texture | null>((resolve) => {
+    const loader = new TextureLoader();
+    loader.load(
+      url,
+      (texture: Texture) => {
+        texture.flipY = false;
+        texture.colorSpace = SRGBColorSpace;
+        texture.anisotropy = 16;
+        texture.needsUpdate = true;
+        resolve(texture);
+      },
+      undefined,
+      (err) => {
+        console.warn("TextureLoader failed for", url, err);
+        resolve(null);
+      },
+    );
+  });
+}
 
 const Model = ({
   src,
@@ -25,29 +54,18 @@ const Model = ({
     });
   }, [scene]);
 
-  const [map, metalnessMap] = useTexture(
-    [mapSrc, metalnessMapSrc].filter(isNotUndefined),
-    (textures) => {
-      textures.forEach((texture) => {
-        if (texture) {
-          texture.flipY = false;
-          texture.colorSpace = SRGBColorSpace;
-          texture.anisotropy = 16;
-        }
-      });
-    },
-  );
-
   useEffect(() => {
-    if (!(materials.main instanceof MeshStandardMaterial) || !map) {
-      return;
-    }
+    Promise.all([loadTexture(mapSrc), loadTexture(metalnessMapSrc)]).then(
+      ([map, metalnessMap]) => {
+        if (!(materials.main instanceof MeshStandardMaterial)) return;
 
-    // Apply textures
-    materials.main.map = map; // eslint-disable-line react-hooks/immutability
-    materials.main.metalnessMap = metalnessMap;
-    materials.main.needsUpdate = true;
-  }, [materials, map, metalnessMap]);
+        materials.main.map = map;
+        materials.main.metalnessMap = metalnessMap;
+        materials.main.needsUpdate = true;
+        materials.main.needsUpdate = true;
+      },
+    );
+  }, [materials, mapSrc, metalnessMapSrc]);
 
   return <primitive object={scene} scale={100} {...props} />;
 };
