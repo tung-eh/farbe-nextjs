@@ -43,29 +43,31 @@ const Scene = () => {
   }, []);
 
   useEffect(() => {
-    const sections = document.querySelectorAll<HTMLElement>(
-      "[data-scene-position]",
-    );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const viewportIntersectionRatio =
+            entry.intersectionRect.height / window.innerHeight;
 
-    sections.forEach((section) => {
-      const model = section.dataset.sceneModel;
-      if (!model) return;
+          if (viewportIntersectionRatio > 0.5) {
+            const section = entry.target as HTMLElement;
+            const model = section.dataset.sceneModel;
+            if (!model) return;
 
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (!entry) return;
-
-          if (entry.isIntersecting) {
             setActiveModel(model as FilmModel);
           }
-        },
-        {
-          threshold: 0.6,
-        },
-      );
+        });
+      },
+      {
+        threshold: [0.3, 0.4, 0.5, 0.6, 0.7],
+      },
+    );
 
-      observer.observe(section);
-    });
+    document
+      .querySelectorAll<HTMLElement>("[data-scene-position]")
+      .forEach((section) => {
+        observer.observe(section);
+      });
   }, []);
 
   useGSAP(() => {
