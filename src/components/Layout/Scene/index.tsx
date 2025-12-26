@@ -46,6 +46,9 @@ const Scene = () => {
     const canisterPosition = canisterRef.current.position;
     const packagingPosition = packagingRef.current.position;
 
+    const canisterRotation = canisterRef.current.rotation;
+    const packagingRotation = packagingRef.current.rotation;
+
     const animateOnScroll = () => {
       const sections = document.querySelectorAll<HTMLElement>(
         "[data-scene-position]",
@@ -69,6 +72,22 @@ const Scene = () => {
             invalidateOnRefresh: true,
           },
         });
+
+        if (shouldRotate) {
+          gsap.to([canisterRotation, packagingRotation], {
+            y: `+=${Math.PI * 2}`,
+            stagger: 0.05,
+            ease: "linear",
+            repeatRefresh: true,
+            scrollTrigger: {
+              trigger: section,
+              start: "top center",
+              end: "bottom center",
+              scrub: 0.6,
+              invalidateOnRefresh: true,
+            },
+          });
+        }
       });
     };
 
