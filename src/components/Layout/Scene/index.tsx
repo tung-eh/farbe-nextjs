@@ -14,6 +14,8 @@ import FilmCanister from "./FilmCanister";
 import FilmPackaging from "./FilmPackaging";
 import AbsoluteGroup from "./AbsoluteGroup";
 
+type FilmModel = "100" | "200" | "400" | "800";
+
 const Scene = () => {
   const pathname = usePathname();
   const { width } = useWindowSize();
@@ -25,7 +27,7 @@ const Scene = () => {
 
   const { totalItems } = useCart();
 
-  const [activeModel] = useState<"100" | "200" | "400" | "800">("800");
+  const [activeModel, setActiveModel] = useState<FilmModel>("800");
 
   useEffect(() => {
     const updateCanisterRotation = () => {
@@ -38,6 +40,32 @@ const Scene = () => {
     gsap.ticker.add(updateCanisterRotation);
 
     return () => gsap.ticker.remove(updateCanisterRotation);
+  }, []);
+
+  useEffect(() => {
+    const sections = document.querySelectorAll<HTMLElement>(
+      "[data-scene-position]",
+    );
+
+    sections.forEach((section) => {
+      const model = section.dataset.sceneModel;
+      if (!model) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry) return;
+
+          if (entry.isIntersecting) {
+            setActiveModel(model as FilmModel);
+          }
+        },
+        {
+          threshold: 0.6,
+        },
+      );
+
+      observer.observe(section);
+    });
   }, []);
 
   useGSAP(() => {
@@ -55,7 +83,6 @@ const Scene = () => {
       );
 
       sections.forEach((section) => {
-        const model = section.dataset.sceneModel;
         const position = section.dataset.scenePosition;
         const shouldRotate = section.dataset.sceneRotate;
 
