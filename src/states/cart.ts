@@ -33,7 +33,7 @@ export const useCart = () => {
     0,
   );
 
-  function insertItem(item: CartItem) {
+  const insertItem = (item: CartItem) => {
     setItems(
       produce((draft) => {
         const currentQuantity = draft[item.product.id]?.quantity ?? 0;
@@ -43,9 +43,9 @@ export const useCart = () => {
         };
       }),
     );
-  }
+  };
 
-  function upsertItem(item: CartItem) {
+  const upsertItem = (item: CartItem) => {
     if (item.quantity <= 0) {
       removeItem(item.product.id);
       return;
@@ -56,19 +56,19 @@ export const useCart = () => {
         draft[item.product.id] = item;
       }),
     );
-  }
+  };
 
-  function removeItem(id: string) {
+  const removeItem = (id: string) => {
     setItems(
       produce((draft) => {
         delete draft[id];
       }),
     );
-  }
+  };
 
-  function clear() {
+  const clear = () => {
     setItems({});
-  }
+  };
 
   return {
     items,
