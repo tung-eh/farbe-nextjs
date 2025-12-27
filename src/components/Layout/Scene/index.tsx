@@ -68,7 +68,7 @@ const Scene = () => {
       .forEach((section) => {
         observer.observe(section);
       });
-  }, []);
+  }, [pathname]);
 
   useGSAP(() => {
     if (!canisterRef.current || !packagingRef.current) return;
