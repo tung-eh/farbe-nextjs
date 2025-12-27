@@ -5,6 +5,7 @@ import { useRef, useState, useEffect } from "react";
 import { Group } from "three";
 import { SoftShadows, Environment, Float } from "@react-three/drei";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 import { useWindowSize, useIsMounted } from "usehooks-ts";
 
@@ -72,6 +73,7 @@ const Scene = () => {
 
   useGSAP(() => {
     if (!canisterRef.current || !packagingRef.current) return;
+    ScrollTrigger.refresh();
 
     const canisterPosition = canisterRef.current.position;
     const packagingPosition = packagingRef.current.position;
