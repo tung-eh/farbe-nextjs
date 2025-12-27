@@ -15,7 +15,7 @@ const ClearCart = () => {
   useEffect(() => {
     if (searchParams.get("order") === "completed") {
       clearCart();
-      router.replace(pathname);
+      window.history.replaceState(null, "", pathname);
     }
   }, [searchParams, clearCart, router, pathname]);
 
