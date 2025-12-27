@@ -20,18 +20,17 @@ export const useCart = () => {
     {},
   );
 
-  const isMounted = useIsMounted()();
-  const items = isMounted ? itemsState : {};
+  const isMounted = useIsMounted();
+  const items = isMounted() ? itemsState : {};
 
   const totalPrice = Object.values(items).reduce(
     (sum, item) => sum + item.product.price * item.quantity,
     0,
   );
 
-  const totalItems = Object.values(items).reduce(
-    (sum, item) => sum + item.quantity,
-    0,
-  );
+  const totalItems = isMounted()
+    ? Object.values(items).reduce((sum, item) => sum + item.quantity, 0)
+    : Infinity;
 
   const insertItem = (item: CartItem) => {
     setItems(

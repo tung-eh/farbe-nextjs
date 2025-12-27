@@ -19,7 +19,7 @@ type FilmModel = "100" | "200" | "400" | "800";
 const Scene = () => {
   const pathname = usePathname();
   const { width } = useWindowSize();
-  const isMounted = useIsMounted()();
+  const isMounted = useIsMounted();
   const canisterRef = useRef<Group>(null);
   const canisterModelRef = useRef<Group>(null);
   const packagingRef = useRef<Group>(null);
@@ -134,7 +134,7 @@ const Scene = () => {
   }, [pathname]);
 
   useGSAP(() => {
-    if (!isMounted || !canisterRef.current || !packagingRef.current) return;
+    if (!isMounted() || !canisterRef.current || !packagingRef.current) return;
 
     const canisterRotation = canisterRef.current.rotation;
     const packagingRotation = packagingRef.current.rotation;
